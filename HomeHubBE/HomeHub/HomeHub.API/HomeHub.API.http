@@ -1,0 +1,6 @@
+@HomeHub.API_HostAddress = http://localhost:5194
+
+GET {{HomeHub.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34723.18
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeHub.API", "HomeHub.API\HomeHub.API.csproj", "{3AFB8723-A4E9-4385-BE60-74077FB2BEE5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3AFB8723-A4E9-4385-BE60-74077FB2BEE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AFB8723-A4E9-4385-BE60-74077FB2BEE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AFB8723-A4E9-4385-BE60-74077FB2BEE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AFB8723-A4E9-4385-BE60-74077FB2BEE5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {936D5C4B-06C4-4E74-9340-900A7282AC1C}
+	EndGlobalSection
+EndGlobal
