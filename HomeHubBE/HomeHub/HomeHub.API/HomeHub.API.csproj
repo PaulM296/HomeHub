@@ -10,4 +10,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HomeHub.App\HomeHub.App.csproj" />
+    <ProjectReference Include="..\HomeHub.Infrastructure\HomeHub.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

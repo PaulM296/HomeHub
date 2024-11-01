@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HomeHub.App\HomeHub.App.csproj" />
+  </ItemGroup>
+
 </Project>
