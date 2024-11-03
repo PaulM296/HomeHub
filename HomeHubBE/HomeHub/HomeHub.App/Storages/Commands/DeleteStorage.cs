@@ -3,7 +3,7 @@ using HomeHub.App.Interfaces;
 using HomeHub.Domain.Enums;
 using MediatR;
 
-namespace HomeHub.App.Storages
+namespace HomeHub.App.Storages.Commands
 {
     public record DeleteStorage(Guid userId, string storageName, Guid? parentStorageId) : IRequest<Unit>;
 

@@ -4,7 +4,7 @@ using HomeHub.App.Exceptions;
 using HomeHub.App.Interfaces;
 using MediatR;
 
-namespace HomeHub.App.Storages
+namespace HomeHub.App.Storages.Commands
 {
     public record UpdateStorage(Guid userId, string name, UpdateStorageDto updateStorageDto) : IRequest<StorageResponseDto>;
 

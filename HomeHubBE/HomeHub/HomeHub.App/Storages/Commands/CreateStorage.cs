@@ -4,7 +4,7 @@ using HomeHub.App.Interfaces;
 using HomeHub.Domain.Entities;
 using MediatR;
 
-namespace HomeHub.App.Storages
+namespace HomeHub.App.Storages.Commands
 {
     public record CreateStorage(Guid userId, CreateStorageDto createStorageRequestDto) : IRequest<StorageResponseDto>;
 

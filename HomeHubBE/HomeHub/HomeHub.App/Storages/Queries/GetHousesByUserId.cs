@@ -25,3 +25,4 @@ namespace HomeHub.App.Storages.Queries
             return _mapper.Map<ICollection<StorageResponseDto>>(storages);
         }
     }
+}

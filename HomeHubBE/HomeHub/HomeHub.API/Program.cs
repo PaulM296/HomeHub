@@ -1,6 +1,8 @@
+using HomeHub.API.Extensions;
 using HomeHub.API.Models;
 using HomeHub.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
 
