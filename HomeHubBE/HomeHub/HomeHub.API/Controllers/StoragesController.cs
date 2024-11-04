@@ -1,5 +1,6 @@
 ﻿using HomeHub.API.Extensions;
 using HomeHub.App.Dtos.StorageDtos;
+using HomeHub.App.Items.Queries;
 using HomeHub.App.Storages.Commands;
 using HomeHub.App.Storages.Queries;
 using MediatR;
@@ -83,6 +84,28 @@ namespace HomeHub.API.Controllers
             var userId = HttpContext.GetUserIdClaimValue();
 
             var command = new GetRoomsByHouseId(userId, houseId);
+            var response = await _mediator.Send(command);
+
+            return Ok(response);
+        }
+
+        [HttpGet("{roomId}/substorages")]
+        public async Task<IActionResult> GetSubStoragesByRoomId(Guid roomId)
+        {
+            var userId = HttpContext.GetUserIdClaimValue();
+
+            var command = new GetSubStoragesByRoomId(userId, roomId);
+            var response = await _mediator.Send(command);
+
+            return Ok(response);
+        }
+
+        [HttpGet("{storageName}/items")]
+        public async Task<IActionResult> GetItemsByStorageName(string storageName)
+        {
+            var userId = HttpContext.GetUserIdClaimValue();
+
+            var command = new GetItemsByStorageName(userId, storageName);
             var response = await _mediator.Send(command);
 
             return Ok(response);

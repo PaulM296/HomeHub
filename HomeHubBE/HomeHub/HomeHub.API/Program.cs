@@ -1,19 +1,22 @@
 using HomeHub.API.Extensions;
 using HomeHub.API.Models;
+using HomeHub.App.Options;
+using HomeHub.App.Services;
+using HomeHub.Domain.Entities;
 using HomeHub.Infrastructure;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Register authentication configurations
+builder.RegisterAuthentication();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwagger();
 
 // Database
 var config = new ConfigurationBuilder()
@@ -37,6 +40,23 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(string.
      secrets.DatabasePassword
     )));
 
+// ASP.NET Identity
+builder.Services.AddIdentity<User, IdentityRole<Guid>>()
+    .AddEntityFrameworkStores<AppDbContext>();
+
+// JWT settings and custom Identity Service
+builder.Services.Configure<JwtSettings>(config.GetSection("JwtSettings"));
+builder.Services.AddSingleton<IdentityService>();
+
+// MediatR
+builder.Services.AddMediatR();
+
+// AutoMapper
+builder.Services.AddAutoMapper();
+
+// Repositories
+builder.Services.AddRepositories();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -48,6 +68,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
