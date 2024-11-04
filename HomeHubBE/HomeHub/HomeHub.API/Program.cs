@@ -1,4 +1,5 @@
 using HomeHub.API.Extensions;
+using HomeHub.API.Middleware;
 using HomeHub.API.Models;
 using HomeHub.App.Options;
 using HomeHub.App.Services;
@@ -65,6 +66,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Custom Exception middleware
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 

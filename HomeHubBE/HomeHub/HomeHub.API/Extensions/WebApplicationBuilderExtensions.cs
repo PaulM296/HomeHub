@@ -69,7 +69,7 @@ namespace HomeHub.API.Extensions
         {
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "StackBot API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "HomeHub API", Version = "v1" });
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,

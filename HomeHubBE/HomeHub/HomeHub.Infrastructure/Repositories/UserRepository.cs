@@ -126,19 +126,50 @@ namespace HomeHub.Infrastructure.Repositories
             return await _context.Users.Where(u => userIdsFromStorage.Contains(u.Id)).ToListAsync();
         }
 
-        public Task<User> RegisterUser(User user, string password)
+        public async Task<User> RegisterUser(User user, string password)
         {
-            throw new NotImplementedException();
+            var existingIdentity = await _userManager.FindByEmailAsync(user.UserName);
+            if (existingIdentity != null)
+            {
+                throw new UserAlreadyExistsException(user.UserName);
+            }
+
+            var result = await _userManager.CreateAsync(user, password);
+
+            if (!result.Succeeded)
+            {
+                throw new ApplicationException("User creation failed!");
+            }
+            return user;
         }
 
-        public Task<User> LoginUser(string email, string password)
+        public async Task<User> LoginUser(string email, string password)
         {
-            throw new NotImplementedException();
+            var identityUser = await _userManager.FindByEmailAsync(email);
+            if (identityUser == null)
+            {
+                throw new InvalidCredentialsException();
+            }
+
+            var result = await _signInManager.CheckPasswordSignInAsync(identityUser, password, false);
+
+            if (!result.Succeeded)
+            {
+                throw new InvalidCredentialsException();
+            }
+
+            return identityUser;
         }
 
-        public Task<User> GetUserByEmail(string email)
+        public async Task<User> GetUserByEmail(string email)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                throw new UserNotFoundException(email);
+            }
+
+            return user;
         }
     }
 }
