@@ -3,7 +3,6 @@ using HomeHub.Domain.Entities;
 using HomeHub.Domain.Enums;
 using HomeHub.Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace HomeHub.Infrastructure.Repositories
 {
@@ -151,9 +150,20 @@ namespace HomeHub.Infrastructure.Repositories
             }
         }
 
-        public Task<ICollection<Storage>> GetSubStoragesByRoomId(Guid userId, Guid parentId)
+        public async Task<ICollection<Storage>> GetSubStoragesByRoomId(Guid userId, Guid parentId)
         {
-            throw new NotImplementedException();
+            var userStorages = await _context.UserStorage.Where(us => us.UserId == userId).ToListAsync();
+
+            var storages = new List<Storage>();
+
+            foreach (var userStorage in userStorages)
+            {
+                var getStorage = await _context.Storages.FirstOrDefaultAsync(s => s.Id == userStorage.StorageId);
+
+                storages.Add(getStorage);
+            }
+
+            return storages.Where(s => s.ParentStorageId == parentId && (s.Type == StorageType.Deposit || s.Type == StorageType.Fridge)).ToList();
         }
     }
 }
