@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateStorage } from '../../models/createStorage';
 import { UpdateStorage } from '../../models/updateStorage';
 import { EditStorageDialogComponent, EditStorageDialogData } from '../edit-storage-dialog/edit-storage-dialog.component';
+import { ConfirmDialogComponent, ConfirmDialogData } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -69,8 +70,22 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  deleteHouse(houseId: string): void {
-    console.log('Deleting house with ID:', houseId);
+  deleteHouse(house: StorageResponse): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { itemType: 'house' } as ConfirmDialogData
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.storageService.deleteStorage(house.name).subscribe({
+          next: () => {
+            this.houses = this.houses.filter(h => h.id !== house.id);
+            console.log(`House ${house.name} deleted successfully.`);
+          },
+          error: (err) => console.error('Error deleting house:', err)
+        });
+      }
+    });
   }
 
   viewRooms(houseId: string): void {

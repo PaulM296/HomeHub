@@ -1,0 +1,27 @@
+.dialog-title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+mat-dialog-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+}
+
+mat-dialog-content {
+  font-size: 1.1em;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+button {
+  min-width: 80px;
+}
