@@ -1,17 +1,20 @@
 <mat-card class="storage-card">
-    <mat-card-header>
-      <mat-icon aria-hidden="true">{{ icon }}</mat-icon>
-      <mat-card-title>{{ name }}</mat-card-title>
-      <mat-card-subtitle>{{ description }}</mat-card-subtitle>
-    </mat-card-header>
+    <div class="card-content">
+        <mat-icon class="icon" aria-hidden="true">{{ icon }}</mat-icon>
   
-    <mat-card-actions align="end">
-      <button mat-raised-button color="primary" (click)="onEdit($event)">
-        Edit
-      </button>
-      <button mat-raised-button color="warn" (click)="onDelete($event)">
-        Delete
-      </button>
-    </mat-card-actions>
-  </mat-card>
+        <div class="text-content">
+            <div class="title-container">
+                <mat-card-title class="title">{{ name }}</mat-card-title>
+            </div>
+            <div class="description-container">
+                <mat-card-subtitle class="description">{{ description }}</mat-card-subtitle>
+            </div>
+        </div>
+  
+        <div class="actions">
+            <button mat-raised-button color="primary" (click)="onEdit($event)">Edit</button>
+            <button mat-raised-button color="warn" (click)="onDelete($event)">Delete</button>
+        </div>
+    </div>
+</mat-card>
   

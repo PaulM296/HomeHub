@@ -7,8 +7,8 @@ export interface StorageResponse {
 }
 
 export enum StorageType {
-    House = 'House',
-    Room = 'Room',
-    Fridge = 'Fridge',
-    Deposit = 'Deposit'
+    House = 0,
+    Room = 1,
+    Fridge = 2,
+    Deposit = 3
 }

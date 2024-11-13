@@ -1,16 +1,18 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StorageResponse } from '../../models/storageResponse';
 import { StorageService } from '../../services/storage.service';
 import { CommonModule } from '@angular/common';
 import { StorageCardComponent } from '../storage-card/storage-card.component';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-room',
   standalone: true,
   imports: [
     CommonModule,
-    StorageCardComponent
+    StorageCardComponent,
+    MatButton
   ],
   templateUrl: './room.component.html',
   styleUrl: './room.component.scss'
@@ -18,6 +20,7 @@ import { StorageCardComponent } from '../storage-card/storage-card.component';
 export class RoomComponent implements OnInit {
   private storageService = inject(StorageService);
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   rooms: StorageResponse[] = [];
   isLoading = true;
@@ -48,5 +51,13 @@ export class RoomComponent implements OnInit {
 
   deleteRoom(roomId: string): void {
     console.log('Deleting room with ID:', roomId);
+  }
+
+  addRoom(): void {
+    console.log('Add Room button clicked');
+  }
+
+  viewStorages(roomId: string): void {
+    this.router.navigate([`/rooms/${roomId}/storages`]);
   }
 }

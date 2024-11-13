@@ -18,4 +18,8 @@ export class StorageService {
   getRoomsByHouseId(houseId: string): Observable<StorageResponse[]> {
     return this.http.get<StorageResponse[]>(`${this.apiUrl}/${houseId}/rooms`);
   }
+  
+  getStoragesByRoomId(roomId: string): Observable<StorageResponse[]> {
+    return this.http.get<StorageResponse[]>(`${this.apiUrl}/${roomId}/substorages`);
+  }
 }

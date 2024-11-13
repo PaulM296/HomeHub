@@ -4,13 +4,15 @@ import { StorageService } from '../../services/storage.service';
 import { CommonModule } from '@angular/common';
 import { StorageCardComponent } from '../storage-card/storage-card.component';
 import { Router } from '@angular/router';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
     CommonModule,
-    StorageCardComponent
+    StorageCardComponent,
+    MatButton
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -50,5 +52,10 @@ export class HomeComponent implements OnInit {
 
   viewRooms(houseId: string): void {
     this.router.navigate([`/houses/${houseId}/rooms`]);
+  }
+
+  addHouse(): void {
+    console.log('Add House button clicked');
+    
   }
 }

@@ -1,0 +1,16 @@
+<div *ngIf="isLoading">Loading storages...</div>
+
+<div *ngIf="!isLoading && storages.length === 0">
+  No storages found in this room.
+</div>
+
+<div *ngIf="storages.length > 0" class="storages-container">
+  <app-storage-card
+    *ngFor="let storage of storages"
+    [name]="storage.name"
+    [description]="storage.description"
+    [icon]="'archive'"
+    (edit)="editRoomStorage(storage)"
+    (delete)="deleteRoomStorage(storage.id)"
+  ></app-storage-card>
+</div>

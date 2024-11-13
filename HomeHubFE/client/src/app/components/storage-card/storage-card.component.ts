@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MatCard, MatCardActions, MatCardHeader, MatCardSubtitle, MatCardTitle } from '@angular/material/card';
+import { MatButton } from '@angular/material/button';
+import { MatCard, MatCardSubtitle, MatCardTitle } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
@@ -7,11 +8,10 @@ import { MatIcon } from '@angular/material/icon';
   standalone: true,
   imports: [
     MatCard, 
-    MatCardHeader,
     MatIcon,
     MatCardTitle,
     MatCardSubtitle,
-    MatCardActions
+    MatButton
   ],
   templateUrl: './storage-card.component.html',
   styleUrl: './storage-card.component.scss'
