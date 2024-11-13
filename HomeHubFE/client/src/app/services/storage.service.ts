@@ -1,9 +1,17 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { StorageResponse } from '../models/storageResponse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
+  private apiUrl = `${ environment.apiUrl }/storages`;
+  private http = inject(HttpClient);
 
-  constructor() { }
+  getHouses(): Observable<StorageResponse[]> {
+    return this.http.get<StorageResponse[]>(`${this.apiUrl}/houses`);
+  }
 }
