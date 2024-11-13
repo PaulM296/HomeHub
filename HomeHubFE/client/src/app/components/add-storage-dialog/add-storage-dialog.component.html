@@ -1,19 +1,22 @@
-<h2 mat-dialog-title>Add {{ getStorageTypeString() | titlecase }}</h2>
-<mat-dialog-content [formGroup]="storageForm">
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input matInput formControlName="name" placeholder="Enter {{ getStorageTypeString() | lowercase }} name">
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Description</mat-label>
-    <textarea matInput formControlName="description" placeholder="Enter description"></textarea>
-  </mat-form-field>
-</mat-dialog-content>
-
-<mat-dialog-actions align="end">
-  <button mat-raised-button (click)="close()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="submit()" [disabled]="storageForm.invalid">
-    Add {{ getStorageTypeString() | titlecase }}
-  </button>
-</mat-dialog-actions>
+<div class="dialog-title">
+    <h2 mat-dialog-title>Add {{ getStorageTypeString() | titlecase }}</h2>
+  </div>
+  <mat-dialog-content [formGroup]="storageForm">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" placeholder="Enter {{ getStorageTypeString() | lowercase }} name">
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" placeholder="Enter description"></textarea>
+    </mat-form-field>
+  </mat-dialog-content>
+  
+  <mat-dialog-actions align="end">
+    <button mat-raised-button (click)="close()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="submit()" [disabled]="storageForm.invalid">
+      Add {{ getStorageTypeString() | titlecase }}
+    </button>
+  </mat-dialog-actions>
+  
