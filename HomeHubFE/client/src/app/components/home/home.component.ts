@@ -1,10 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { StorageResponse } from '../../models/storageResponse';
+import { StorageResponse, StorageType } from '../../models/storageResponse';
 import { StorageService } from '../../services/storage.service';
 import { CommonModule } from '@angular/common';
 import { StorageCardComponent } from '../storage-card/storage-card.component';
 import { Router } from '@angular/router';
 import { MatButton } from '@angular/material/button';
+import { AddStorageDialogComponent, AddStorageDialogData } from '../add-storage-dialog/add-storage-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateStorage } from '../../models/createStorage';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +23,7 @@ import { MatButton } from '@angular/material/button';
 export class HomeComponent implements OnInit {
   private storageService = inject(StorageService);
   private router = inject(Router);
+  private dialog = inject(MatDialog);
   houses: StorageResponse[] = [];
   isLoading = true;
   hasHouses = false;
@@ -55,7 +59,20 @@ export class HomeComponent implements OnInit {
   }
 
   addHouse(): void {
-    console.log('Add House button clicked');
-    
+    const dialogRef = this.dialog.open(AddStorageDialogComponent, {
+      width: '600px',
+      data: { storageType: StorageType.House } as AddStorageDialogData
+    });
+
+    dialogRef.afterClosed().subscribe((result: CreateStorage | undefined) => {
+      if (result) {
+        this.storageService.createStorage(result).subscribe({
+          next: (newHouse) => {
+            this.houses.push(newHouse);
+          },
+          error: (err) => console.error('Error adding house:', err)
+        });
+      }
+    });
   }
 }
