@@ -23,11 +23,13 @@ export class StorageCardComponent {
   @Output() edit = new EventEmitter<void>();
   @Output() delete = new EventEmitter<void>();
 
-  onEdit() {
+  onEdit(event: MouseEvent) {
+    event.stopPropagation();
     this.edit.emit();
   }
 
-  onDelete() {
+  onDelete(event: MouseEvent) {
+    event.stopPropagation();
     this.delete.emit();
   }
 }

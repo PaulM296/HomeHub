@@ -3,6 +3,7 @@ import { StorageResponse } from '../../models/storageResponse';
 import { StorageService } from '../../services/storage.service';
 import { CommonModule } from '@angular/common';
 import { StorageCardComponent } from '../storage-card/storage-card.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,7 @@ import { StorageCardComponent } from '../storage-card/storage-card.component';
 })
 export class HomeComponent implements OnInit {
   private storageService = inject(StorageService);
+  private router = inject(Router);
   houses: StorageResponse[] = [];
   isLoading = true;
   hasHouses = false;
@@ -44,5 +46,9 @@ export class HomeComponent implements OnInit {
 
   deleteHouse(houseId: string): void {
     console.log('Deleting house with ID:', houseId);
+  }
+
+  viewRooms(houseId: string): void {
+    this.router.navigate([`/houses/${houseId}/rooms`]);
   }
 }
