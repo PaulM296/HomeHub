@@ -8,6 +8,8 @@ import { MatButton } from '@angular/material/button';
 import { AddStorageDialogComponent, AddStorageDialogData } from '../add-storage-dialog/add-storage-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateStorage } from '../../models/createStorage';
+import { UpdateStorage } from '../../models/updateStorage';
+import { EditStorageDialogComponent, EditStorageDialogData } from '../edit-storage-dialog/edit-storage-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -47,7 +49,24 @@ export class HomeComponent implements OnInit {
   }
 
   editHouse(house: StorageResponse): void {
-    console.log('Editing house:', house);
+    const dialogRef = this.dialog.open(EditStorageDialogComponent, {
+      width: '600px',
+      data: { storageType: StorageType.House, storage: house } as EditStorageDialogData
+    });
+
+    dialogRef.afterClosed().subscribe((result: UpdateStorage | undefined) => {
+      if (result) {
+        this.storageService.updateStorage(house.name, result).subscribe({
+          next: (updatedHouse) => {
+            const index = this.houses.findIndex(h => h.id === updatedHouse.id);
+            if (index !== -1) {
+              this.houses[index] = updatedHouse;
+            }
+          },
+          error: (err) => console.error('Error updating house:', err)
+        });
+      }
+    });
   }
 
   deleteHouse(houseId: string): void {
