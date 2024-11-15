@@ -11,6 +11,7 @@ import { CreateStorage } from '../../models/createStorage';
 import { UpdateStorage } from '../../models/updateStorage';
 import { EditStorageDialogComponent, EditStorageDialogData } from '../edit-storage-dialog/edit-storage-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../confirm-dialog/confirm-dialog.component';
+import { HouseDataService } from '../../services/house-data.service';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,7 @@ import { ConfirmDialogComponent, ConfirmDialogData } from '../confirm-dialog/con
 })
 export class HomeComponent implements OnInit {
   private storageService = inject(StorageService);
+  private houseDataService = inject(HouseDataService);
   private router = inject(Router);
   private dialog = inject(MatDialog);
   houses: StorageResponse[] = [];
@@ -88,8 +90,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  viewRooms(houseId: string): void {
-    this.router.navigate([`/houses/${houseId}/rooms`]);
+  viewRooms(house: StorageResponse): void {
+    this.houseDataService.setHouseName(house.name);
+    this.router.navigate([`/houses/${house.id}/rooms`]);
   }
 
   addHouse(): void {

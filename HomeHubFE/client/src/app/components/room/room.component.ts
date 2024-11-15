@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UpdateStorage } from '../../models/updateStorage';
 import { EditStorageDialogComponent, EditStorageDialogData } from '../edit-storage-dialog/edit-storage-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../confirm-dialog/confirm-dialog.component';
+import { HouseDataService } from '../../services/house-data.service';
 
 @Component({
   selector: 'app-room',
@@ -25,6 +26,7 @@ import { ConfirmDialogComponent, ConfirmDialogData } from '../confirm-dialog/con
 })
 export class RoomComponent implements OnInit {
   private storageService = inject(StorageService);
+  private houseDataService = inject(HouseDataService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private dialog = inject(MatDialog);
@@ -32,10 +34,17 @@ export class RoomComponent implements OnInit {
   rooms: StorageResponse[] = [];
   isLoading = true;
   houseId: string | null = null;
+  houseName: string = 'Unknown House';
 
   ngOnInit(): void {
     this.houseId = this.route.snapshot.paramMap.get('houseId');
+    this.houseName = this.houseDataService.getHouseName() || 'Unknown House';
+
     this.loadRooms();
+  }
+
+  ngOnDestroy(): void {
+    this.houseDataService.clearHouseName();
   }
 
   loadRooms(): void {
@@ -105,7 +114,7 @@ export class RoomComponent implements OnInit {
       if (result && this.houseId) {
         const newRoomData: CreateStorage = {
           ...result,
-          parentStorageName: 'House Name Here'
+          parentStorageName: this.houseName
         };
   
         this.storageService.createStorage(newRoomData).subscribe({
