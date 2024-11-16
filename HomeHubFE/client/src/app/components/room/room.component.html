@@ -1,24 +1,24 @@
 <div class="header">
-    <h1>Rooms</h1>
-    <button mat-raised-button color="accent" (click)="addRoom()">+ Add</button>
-  </div>
-  
-  <div *ngIf="isLoading" class="loading">Loading rooms...</div>
-  
-  <div *ngIf="!isLoading && rooms.length === 0" class="no-rooms">
-    No rooms found for this house.
-  </div>
-  
-  <div *ngIf="rooms.length > 0" class="rooms-container">
-    <app-storage-card
-      *ngFor="let room of rooms"
-      [name]="room.name"
-      [description]="room.description"
-      [icon]="'room'"
-      (edit)="editRoom(room)"
-      (delete)="deleteRoom(room)"
-      (click)="viewStorages(room.id)"
-    >
-    </app-storage-card>
-  </div>
+  <h1>Rooms</h1>
+  <button mat-raised-button color="accent" (click)="addRoom()">+ Add</button>
+</div>
+
+<div *ngIf="isLoading" class="loading">Loading rooms...</div>
+
+<div *ngIf="!isLoading && rooms.length === 0" class="no-rooms">
+  No rooms found for this house.
+</div>
+
+<div *ngIf="rooms.length > 0" class="rooms-container">
+  <app-storage-card
+    *ngFor="let room of rooms"
+    [name]="room.name"
+    [description]="room.description"
+    [icon]="'room'"
+    (edit)="editRoom(room)"
+    (delete)="deleteRoom(room)"
+    (click)="viewStorages(room)"
+  >
+  </app-storage-card>
+</div>
   

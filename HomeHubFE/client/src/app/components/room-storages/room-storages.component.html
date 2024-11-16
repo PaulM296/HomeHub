@@ -1,6 +1,11 @@
-<div *ngIf="isLoading">Loading storages...</div>
+<div class="header">
+  <h1>Room Storages</h1>
+  <button mat-raised-button color="accent" (click)="addStorage()">+ Add</button>
+</div>
 
-<div *ngIf="!isLoading && storages.length === 0">
+<div *ngIf="isLoading" class="loading">Loading storages...</div>
+
+<div *ngIf="!isLoading && storages.length === 0" class="no-storages">
   No storages found in this room.
 </div>
 
@@ -11,6 +16,7 @@
     [description]="storage.description"
     [icon]="'archive'"
     (edit)="editRoomStorage(storage)"
-    (delete)="deleteRoomStorage(storage.id)"
+    (delete)="deleteRoomStorage(storage)"
+    (click)="viewItems(storage)"
   ></app-storage-card>
 </div>

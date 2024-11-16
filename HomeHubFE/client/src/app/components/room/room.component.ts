@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UpdateStorage } from '../../models/updateStorage';
 import { EditStorageDialogComponent, EditStorageDialogData } from '../edit-storage-dialog/edit-storage-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../confirm-dialog/confirm-dialog.component';
-import { HouseDataService } from '../../services/house-data.service';
+import { StorageDataService } from '../../services/storage-data.service';
 
 @Component({
   selector: 'app-room',
@@ -26,7 +26,7 @@ import { HouseDataService } from '../../services/house-data.service';
 })
 export class RoomComponent implements OnInit {
   private storageService = inject(StorageService);
-  private houseDataService = inject(HouseDataService);
+  private storageDataService = inject(StorageDataService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private dialog = inject(MatDialog);
@@ -38,13 +38,13 @@ export class RoomComponent implements OnInit {
 
   ngOnInit(): void {
     this.houseId = this.route.snapshot.paramMap.get('houseId');
-    this.houseName = this.houseDataService.getHouseName() || 'Unknown House';
+    this.houseName = this.storageDataService.getHouseName() || 'Unknown House';
 
     this.loadRooms();
   }
 
   ngOnDestroy(): void {
-    this.houseDataService.clearHouseName();
+    this.storageDataService.clearHouseName();
   }
 
   loadRooms(): void {
@@ -127,7 +127,8 @@ export class RoomComponent implements OnInit {
     });
   }
 
-  viewStorages(roomId: string): void {
-    this.router.navigate([`/rooms/${roomId}/storages`]);
+  viewStorages(room: StorageResponse): void {
+    this.storageDataService.setRoomName(room.name);
+    this.router.navigate([`/rooms/${room.id}/storages`]);
   }
 }

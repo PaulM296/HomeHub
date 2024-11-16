@@ -11,7 +11,7 @@ import { CreateStorage } from '../../models/createStorage';
 import { UpdateStorage } from '../../models/updateStorage';
 import { EditStorageDialogComponent, EditStorageDialogData } from '../edit-storage-dialog/edit-storage-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../confirm-dialog/confirm-dialog.component';
-import { HouseDataService } from '../../services/house-data.service';
+import { StorageDataService } from '../../services/storage-data.service';
 
 @Component({
   selector: 'app-home',
@@ -26,9 +26,10 @@ import { HouseDataService } from '../../services/house-data.service';
 })
 export class HomeComponent implements OnInit {
   private storageService = inject(StorageService);
-  private houseDataService = inject(HouseDataService);
+  private storageDataService = inject(StorageDataService);
   private router = inject(Router);
   private dialog = inject(MatDialog);
+
   houses: StorageResponse[] = [];
   isLoading = true;
   hasHouses = false;
@@ -54,7 +55,10 @@ export class HomeComponent implements OnInit {
   editHouse(house: StorageResponse): void {
     const dialogRef = this.dialog.open(EditStorageDialogComponent, {
       width: '600px',
-      data: { storageType: StorageType.House, storage: house } as EditStorageDialogData
+      data: {
+        storageType: StorageType.House,
+        storage: house
+      } as EditStorageDialogData
     });
 
     dialogRef.afterClosed().subscribe((result: UpdateStorage | undefined) => {
@@ -91,7 +95,7 @@ export class HomeComponent implements OnInit {
   }
 
   viewRooms(house: StorageResponse): void {
-    this.houseDataService.setHouseName(house.name);
+    this.storageDataService.setHouseName(house.name);
     this.router.navigate([`/houses/${house.id}/rooms`]);
   }
 
