@@ -1,0 +1,25 @@
+<div class="header">
+  <h1>Items</h1>
+  <button mat-raised-button color="accent" (click)="addItem()">+ Add</button>
+</div>
+
+<div *ngIf="isLoading" class="loading">Loading items...</div>
+
+<div *ngIf="!isLoading && items.length === 0" class="no-items">
+  No items found in this storage.
+</div>
+
+<!--
+<div *ngIf="items.length > 0" class="items-container">
+  <app-storage-card
+    *ngFor="let storage of storages"
+    [name]="storage.name"
+    [description]="storage.description"
+    [icon]="'archive'"
+    (edit)="editRoomStorage(storage)"
+    (delete)="deleteRoomStorage(storage)"
+    (click)="viewItems(storage)"
+  ></app-storage-card>
+</div>
+-->
+  

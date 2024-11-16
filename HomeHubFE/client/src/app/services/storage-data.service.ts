@@ -8,6 +8,8 @@ export class StorageDataService {
   private houseNameKey = 'houseName';
   private roomName: string | null = null;
   private roomNameKey = 'roomName';
+  private storageName: string | null = null;
+  private storageNameKey = 'storageName';
 
   setHouseName(name: string): void {
     this.houseName = name;
@@ -43,5 +45,23 @@ export class StorageDataService {
   clearRoomName(): void {
     this.roomName = null;
     sessionStorage.removeItem(this.roomNameKey);
+  }
+
+  setStorageName(name: string): void {
+    this.storageName = name;
+    sessionStorage.setItem(this.storageNameKey, name);
+  }
+
+  getStorageName(): string | null {
+    if (this.storageName) {
+      return this.storageName;
+    }
+    const storedName = sessionStorage.getItem(this.storageNameKey);
+    return storedName ? storedName : null;
+  }
+
+  clearStorageName(): void {
+    this.storageName = null;
+    sessionStorage.removeItem(this.storageNameKey);
   }
 }

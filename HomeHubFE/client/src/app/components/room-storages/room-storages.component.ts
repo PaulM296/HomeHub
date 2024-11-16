@@ -39,7 +39,6 @@ export class RoomStoragesComponent implements OnInit {
   ngOnInit(): void {
     this.roomId = this.route.snapshot.paramMap.get('roomId');
     this.roomName = this.storageDataService.getRoomName() || 'Unknown Room';
-    console.log(this.roomName);
     
     this.loadStorages();
   }
@@ -152,6 +151,7 @@ export class RoomStoragesComponent implements OnInit {
   }
 
   viewItems(storage: StorageResponse): void {
-    this.router.navigate([`/rooms/${storage.id}/storages`]);
+    this.storageDataService.setStorageName(storage.name);
+    this.router.navigate([`/storage/${storage.id}/items`]);
   }
 }
