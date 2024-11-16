@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
 
 export interface AddStorageDialogData {
-  storageType: StorageType; 
+  storageType: StorageType;
 }
 
 @Component({

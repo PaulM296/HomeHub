@@ -105,24 +105,47 @@ export class RoomStoragesComponent implements OnInit {
     });
   }
 
-  addStorage(): void {
+  addFridge(): void {
     const dialogRef = this.dialog.open(AddStorageDialogComponent, {
       width: '600px',
-      data: { storageType: StorageType.Room } as AddStorageDialogData
+      data: { storageType: StorageType.Fridge } as AddStorageDialogData
     });
   
     dialogRef.afterClosed().subscribe((result: CreateStorage | undefined) => {
       if (result && this.roomId) {
-        const newRoomData: CreateStorage = {
+        const newFridgeData: CreateStorage = {
           ...result,
           parentStorageName: this.roomName
         };
   
-        this.storageService.createStorage(newRoomData).subscribe({
+        this.storageService.createStorage(newFridgeData).subscribe({
           next: (newRoom) => {
             this.storages.push(newRoom);
           },
-          error: (err) => console.error('Error adding room:', err)
+          error: (err) => console.error('Error adding fridge:', err)
+        });
+      }
+    });
+  }
+
+  addDeposit(): void {
+    const dialogRef = this.dialog.open(AddStorageDialogComponent, {
+      width: '600px',
+      data: { storageType: StorageType.Deposit } as AddStorageDialogData
+    });
+  
+    dialogRef.afterClosed().subscribe((result: CreateStorage | undefined) => {
+      if (result && this.roomId) {
+        const newDepositData: CreateStorage = {
+          ...result,
+          parentStorageName: this.roomName
+        };
+  
+        this.storageService.createStorage(newDepositData).subscribe({
+          next: (newRoom) => {
+            this.storages.push(newRoom);
+          },
+          error: (err) => console.error('Error adding deposit:', err)
         });
       }
     });
