@@ -1,0 +1,30 @@
+<div class="dialog-title">
+  <h2 mat-dialog-title>Add User to a House</h2>
+</div>
+
+<mat-dialog-content [formGroup]="userForm">
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>House</mat-label>
+    <mat-select formControlName="houseId" required>
+      <mat-option *ngFor="let house of houses" [value]="house.id">
+        {{ house.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" formControlName="email" required autocomplete="email" />
+    <mat-error *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+      Please enter a valid email.
+    </mat-error>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button (click)="close()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="submit()" [disabled]="userForm.invalid">
+    Add User
+  </button>
+</mat-dialog-actions>
+

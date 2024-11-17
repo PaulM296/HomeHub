@@ -12,6 +12,7 @@ import { UpdateStorage } from '../../models/updateStorage';
 import { EditStorageDialogComponent, EditStorageDialogData } from '../edit-storage-dialog/edit-storage-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../confirm-dialog/confirm-dialog.component';
 import { StorageDataService } from '../../services/storage-data.service';
+import { AddUserDialogComponent, AddUserDialogData } from '../add-user-dialog/add-user-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -112,6 +113,28 @@ export class HomeComponent implements OnInit {
             this.houses.push(newHouse);
           },
           error: (err) => console.error('Error adding house:', err)
+        });
+      }
+    });
+  }
+
+  addUser(): void {
+    const dialogRef = this.dialog.open(AddUserDialogComponent, {
+      width: '600px',
+      data: { houses: this.houses } as AddUserDialogData
+    });
+  
+    dialogRef.afterClosed().subscribe((result: { houseId: string; email: string } | undefined) => {
+      if (result) {
+        const { houseId, email } = result;
+
+        this.storageService.addUserToHouse(houseId, email).subscribe({
+          next: () => {
+            console.log(`User added successfully to house.`);
+          },
+          error: (err) => {
+            console.error('Error adding user to house:', err);
+          }
         });
       }
     });
