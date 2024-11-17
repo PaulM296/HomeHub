@@ -1,4 +1,4 @@
-<mat-card class="register-container">
+<!-- <mat-card class="register-container">
     <h2>Register</h2>
     <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
         <mat-form-field appearance="fill" class="full-width">
@@ -71,4 +71,57 @@
         Register
         </button>
     </form>
-</mat-card>
+</mat-card> -->
+
+<div class="register-page">
+    <div class="image-container">
+        <div class="gradient-overlay"></div>
+    </div>
+    <mat-card class="register-container">
+        <h2>Register</h2>
+        <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>First Name</mat-label>
+                <input matInput type="text" name="firstName" [(ngModel)]="firstName" required
+                    #firstNameInput="ngModel" />
+                <mat-error *ngIf="firstNameInput.invalid && firstNameInput.touched">
+                    First name is required.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Last Name</mat-label>
+                <input matInput type="text" name="lastName" [(ngModel)]="lastName" required #lastNameInput="ngModel" />
+                <mat-error *ngIf="lastNameInput.invalid && lastNameInput.touched">
+                    Last name is required.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" name="email" [(ngModel)]="email" required email #emailInput="ngModel" />
+                <mat-error *ngIf="emailInput.invalid && emailInput.touched">
+                    Please enter a valid email.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" name="password" [(ngModel)]="password" required
+                    #passwordInput="ngModel" />
+                <mat-error *ngIf="passwordInput.invalid && passwordInput.touched">
+                    Password is required.
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid"
+                class="register-button">
+                Register
+            </button>
+
+            <p class="login-link">
+                Already have an account? <a (click)="goToLogin()">Login</a>
+            </p>
+        </form>
+    </mat-card>
+</div>

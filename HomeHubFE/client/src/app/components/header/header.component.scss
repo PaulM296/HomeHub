@@ -1,0 +1,49 @@
+$app-primary-color: #2c3e50; // Dark slate blue
+$app-secondary-color: #ecf0f1; // Light grey
+$app-accent-color: #3498db; // Soft blue
+$app-danger-color: #e74c3c; // Red for danger/logout
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: $app-primary-color;
+    color: $app-secondary-color;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+    .left-section {
+        display: flex;
+        align-items: center;
+
+        .icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+            color: $app-accent-color;
+        }
+
+        .title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    }
+
+    .logout-btn {
+        background-color: $app-danger-color;
+        color: $app-secondary-color;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: darken($app-danger-color, 10%);
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
