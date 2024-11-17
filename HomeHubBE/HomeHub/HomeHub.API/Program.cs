@@ -23,7 +23,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp", policy =>
     {
-        policy.WithOrigins("http://localhost:4200") // Angular app's URL
+        policy.WithOrigins("http://localhost:4200", "http://ec2-51-20-42-116.eu-north-1.compute.amazonaws.com") // Angular app's URL
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
@@ -72,7 +72,7 @@ builder.Services.AddRepositories();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
