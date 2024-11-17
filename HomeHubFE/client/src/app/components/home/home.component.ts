@@ -12,6 +12,8 @@ import { UpdateStorage } from '../../models/updateStorage';
 import { EditStorageDialogComponent, EditStorageDialogData } from '../edit-storage-dialog/edit-storage-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../confirm-dialog/confirm-dialog.component';
 import { StorageDataService } from '../../services/storage-data.service';
+import { AddUserDialogComponent, AddUserDialogData } from '../add-user-dialog/add-user-dialog.component';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-home',
@@ -27,6 +29,7 @@ import { StorageDataService } from '../../services/storage-data.service';
 export class HomeComponent implements OnInit {
   private storageService = inject(StorageService);
   private storageDataService = inject(StorageDataService);
+  private snackBar = inject(SnackbarService);
   private router = inject(Router);
   private dialog = inject(MatDialog);
 
@@ -65,12 +68,16 @@ export class HomeComponent implements OnInit {
       if (result) {
         this.storageService.updateStorage(house.name, result).subscribe({
           next: (updatedHouse) => {
+            this.snackBar.success('House updated successfully!');
             const index = this.houses.findIndex(h => h.id === updatedHouse.id);
             if (index !== -1) {
               this.houses[index] = updatedHouse;
             }
           },
-          error: (err) => console.error('Error updating house:', err)
+          error: (err) => {
+            this.snackBar.error('Error updating house!');
+            console.error('Error updating house:', err);
+          }
         });
       }
     });
@@ -85,10 +92,13 @@ export class HomeComponent implements OnInit {
       if (confirmed) {
         this.storageService.deleteStorage(house.name).subscribe({
           next: () => {
+            this.snackBar.success('House deleted successfully!');
             this.houses = this.houses.filter(h => h.id !== house.id);
-            console.log(`House ${house.name} deleted successfully.`);
           },
-          error: (err) => console.error('Error deleting house:', err)
+          error: (err) => {
+            this.snackBar.error('Error deleting house!');
+            console.error('Error deleting house:', err);
+          }
         });
       }
     });
@@ -109,9 +119,36 @@ export class HomeComponent implements OnInit {
       if (result) {
         this.storageService.createStorage(result).subscribe({
           next: (newHouse) => {
+            this.snackBar.success('House created successfully!');
             this.houses.push(newHouse);
           },
-          error: (err) => console.error('Error adding house:', err)
+          error: (err) => {
+            this.snackBar.error('Error adding house!');
+            console.error('Error adding house:', err);
+          }
+        });
+      }
+    });
+  }
+
+  addUser(): void {
+    const dialogRef = this.dialog.open(AddUserDialogComponent, {
+      width: '600px',
+      data: { houses: this.houses } as AddUserDialogData
+    });
+  
+    dialogRef.afterClosed().subscribe((result: { houseId: string; email: string } | undefined) => {
+      if (result) {
+        const { houseId, email } = result;
+
+        this.storageService.addUserToHouse(houseId, email).subscribe({
+          next: () => {
+            this.snackBar.success('User added successfully to house!');
+          },
+          error: (err) => {
+            this.snackBar.error('Error adding user to house!');
+            console.error('Error adding user to house:', err);
+          }
         });
       }
     });

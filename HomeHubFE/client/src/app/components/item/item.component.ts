@@ -11,6 +11,7 @@ import { ItemCardComponent } from "../item-card/item-card.component";
 import { ConfirmDialogComponent, ConfirmDialogData } from '../confirm-dialog/confirm-dialog.component';
 import { EditItemDialogComponent, EditItemDialogData } from '../edit-item-dialog/edit-item-dialog.component';
 import { UpdateItem } from '../../models/updateItem';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-item',
@@ -26,6 +27,7 @@ import { UpdateItem } from '../../models/updateItem';
 export class ItemComponent {
   private itemService = inject(ItemService);
   private storageDataService = inject(StorageDataService);
+  private snackBar = inject(SnackbarService);
   private route = inject(ActivatedRoute);
   private dialog = inject(MatDialog);
 
@@ -72,12 +74,16 @@ export class ItemComponent {
       if (result) {
         this.itemService.updateItem(item.name, result).subscribe({
           next: (updatedItem) => {
+            this.snackBar.success('Item updated successfully!');
             const index = this.items.findIndex(i => i.id === updatedItem.id);
             if (index !== -1) {
               this.items[index] = updatedItem;
             }
           },
-          error: (err) => console.error('Error updating item:', err)
+          error: (err) => {
+            this.snackBar.error('Error updating item!');
+            console.error('Error updating item:', err);
+          }
         });
       }
     });
@@ -92,10 +98,13 @@ export class ItemComponent {
       if (confirmed) {
         this.itemService.deleteItem(item.name).subscribe({
           next: () => {
+            this.snackBar.success('Item deleted successfully!');
             this.items = this.items.filter(i => i.id !== item.id);
-            console.log(`Item deleted successfully.`);
           },
-          error: (err) => console.error('Error deleting item:', err)
+          error: (err) => {
+            this.snackBar.error('Error deleting item!');
+            console.error('Error deleting item:', err);
+          }
         });
       }
     });
@@ -116,10 +125,11 @@ export class ItemComponent {
 
         this.itemService.createItem(newItem).subscribe({
           next: (createdItem) => {
+            this.snackBar.success('Item added successfully!');
             this.items.push(createdItem);
-            console.log('Item added successfully');
           },
           error: (err) => {
+            this.snackBar.error('Error adding item!');
             console.error('Error adding item:', err);
           }
         });

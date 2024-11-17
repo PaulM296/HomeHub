@@ -12,6 +12,7 @@ import { UpdateStorage } from '../../models/updateStorage';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../confirm-dialog/confirm-dialog.component';
 import { AddStorageDialogComponent, AddStorageDialogData } from '../add-storage-dialog/add-storage-dialog.component';
 import { CreateStorage } from '../../models/createStorage';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-room-storages',
@@ -27,6 +28,7 @@ import { CreateStorage } from '../../models/createStorage';
 export class RoomStoragesComponent implements OnInit {
   private storageService = inject(StorageService);
   private storageDataService = inject(StorageDataService);
+  private snackBar = inject(SnackbarService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private dialog = inject(MatDialog);
@@ -75,12 +77,16 @@ export class RoomStoragesComponent implements OnInit {
       if (result) {
         this.storageService.updateStorage(storage.name, result).subscribe({
           next: (updatedStorage) => {
+            this.snackBar.success('Storage updated successfully!');
             const index = this.storages.findIndex(s => s.id === updatedStorage.id);
             if (index !== -1) {
               this.storages[index] = updatedStorage;
             }
           },
-          error: (err) => console.error('Error updating storage:', err)
+          error: (err) => {
+            this.snackBar.error('Error updating storage!');
+            console.error('Error updating storage:', err);
+          }
         });
       }
     });
@@ -95,10 +101,13 @@ export class RoomStoragesComponent implements OnInit {
       if (confirmed) {
         this.storageService.deleteStorage(storage.name).subscribe({
           next: () => {
+            this.snackBar.success('Storage deleted successfully!');
             this.storages = this.storages.filter(s => s.id !== storage.id);
-            console.log(`Storage ${storage.name} deleted successfully.`);
           },
-          error: (err) => console.error('Error deleting storage:', err)
+          error: (err) => {
+            this.snackBar.error('Error deleting storage!');
+            console.error('Error deleting storage:', err);
+          }
         });
       }
     });
@@ -119,9 +128,13 @@ export class RoomStoragesComponent implements OnInit {
   
         this.storageService.createStorage(newFridgeData).subscribe({
           next: (newRoom) => {
+            this.snackBar.success('Fridge added successfully!');
             this.storages.push(newRoom);
           },
-          error: (err) => console.error('Error adding fridge:', err)
+          error: (err) => {
+            this.snackBar.error('Error adding fridge!');
+            console.error('Error adding fridge:', err);
+          }
         });
       }
     });
@@ -142,9 +155,13 @@ export class RoomStoragesComponent implements OnInit {
   
         this.storageService.createStorage(newDepositData).subscribe({
           next: (newRoom) => {
+            this.snackBar.success('Deposit added successfully!');
             this.storages.push(newRoom);
           },
-          error: (err) => console.error('Error adding deposit:', err)
+          error: (err) => {
+            this.snackBar.error('Error adding deposit!');
+            console.error('Error adding deposit:', err);
+          }
         });
       }
     });

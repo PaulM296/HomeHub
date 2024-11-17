@@ -43,7 +43,7 @@ export class RegisterComponent {
       next: (response) => {
         localStorage.setItem('token', response.token);
         this.snackbarService.success('Registration successful! You can now log in.');
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
       },
       error: (err) => {
         console.error('Registration failed', err);
@@ -53,6 +53,6 @@ export class RegisterComponent {
   }
 
   goToLogin(): void {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 }

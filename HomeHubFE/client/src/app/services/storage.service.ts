@@ -36,4 +36,8 @@ export class StorageService {
   deleteStorage(storageName: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${storageName}`);
   }
+
+  addUserToHouse(houseId: string, userEmail: string): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/houses/${houseId}/users/${userEmail}`, {});
+  }
 }

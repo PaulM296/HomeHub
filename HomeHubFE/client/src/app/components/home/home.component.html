@@ -1,6 +1,9 @@
 <div class="header">
   <h1>Houses</h1>
-  <button mat-raised-button color="accent" (click)="addHouse()">+ Add</button>
+  <div>
+    <button mat-raised-button class="button" color="accent" (click)="addUser()">+ Add User</button>
+    <button mat-raised-button class="button" color="accent" (click)="addHouse()">+ Add</button>
+  </div>
 </div>
 
 <div *ngIf="isLoading" class="loading">Loading houses...</div>
