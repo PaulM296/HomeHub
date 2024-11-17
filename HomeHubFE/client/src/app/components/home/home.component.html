@@ -1,24 +1,24 @@
 <div class="header">
-    <h1>Houses</h1>
-    <button mat-raised-button color="accent" (click)="addHouse()">+ Add</button>
-  </div>
-  
-  <div *ngIf="isLoading" class="loading">Loading houses...</div>
-  
-  <div *ngIf="!isLoading && !hasHouses" class="no-houses-message">
-    No houses found. Register a house to get started.
-  </div>
-  
-  <div *ngIf="hasHouses" class="houses-container">
-    <app-storage-card
-      *ngFor="let house of houses"
-      [name]="house.name"
-      [description]="house.description"
-      [icon]="'home'"
-      (edit)="editHouse(house)"
-      (delete)="deleteHouse(house)"
-      (click)="viewRooms(house.id)"
-    >
-    </app-storage-card>
-  </div>
+  <h1>Houses</h1>
+  <button mat-raised-button color="accent" (click)="addHouse()">+ Add</button>
+</div>
+
+<div *ngIf="isLoading" class="loading">Loading houses...</div>
+
+<div *ngIf="!isLoading && !hasHouses" class="no-houses-message">
+  No houses found. Register a house to get started.
+</div>
+
+<div *ngIf="hasHouses" class="houses-container">
+  <app-storage-card
+    *ngFor="let house of houses"
+    [name]="house.name"
+    [description]="house.description"
+    [icon]="'home'"
+    (edit)="editHouse(house)"
+    (delete)="deleteHouse(house)"
+    (click)="viewRooms(house)"
+  >
+  </app-storage-card>
+</div>
   

@@ -41,6 +41,17 @@
   color: rgba(0, 0, 0, 0.6);
 }
 
+.additional-info {
+  margin-top: 8px;
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.8);
+
+  p {
+    margin: 0;
+    margin-bottom: 4px;
+  }
+}
+
 .title {
   font-size: 1rem;
   font-weight: 600;
@@ -62,4 +73,3 @@ button[mat-raised-button] {
   height: 36px;
   font-weight: 500;
 }
-  

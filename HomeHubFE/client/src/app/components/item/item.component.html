@@ -1,0 +1,25 @@
+<div class="header">
+  <h1>Items</h1>
+  <button mat-raised-button color="accent" (click)="addItem()">+ Add</button>
+</div>
+
+<div *ngIf="isLoading" class="loading">Loading items...</div>
+
+<div *ngIf="!isLoading && items.length === 0" class="no-items">
+  No items found in this storage.
+</div>
+
+<div *ngIf="items.length > 0" class="items-container">
+  <app-item-card
+    *ngFor="let item of items"
+    [name]="item.name"
+    [description]="item.description"
+    [icon]="'check_box'"
+    [count]="item.count"
+    [expirationDate]="item.expirationDate"
+    [warrantyDate]="item.warrantyDate"
+    (edit)="editItem(item)"
+    (delete)="deleteItem(item)"
+  ></app-item-card>
+</div>
+  
