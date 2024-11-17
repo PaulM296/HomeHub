@@ -88,14 +88,14 @@ export class RoomStoragesComponent implements OnInit {
 
   deleteRoomStorage(storage: StorageResponse): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: { itemType: 'room' } as ConfirmDialogData
+      data: { itemType: 'storage' } as ConfirmDialogData
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.storageService.deleteStorage(storage.name).subscribe({
           next: () => {
-            this.storages = this.storages.filter(r => r.id !== storage.id);
+            this.storages = this.storages.filter(s => s.id !== storage.id);
             console.log(`Storage ${storage.name} deleted successfully.`);
           },
           error: (err) => console.error('Error deleting storage:', err)

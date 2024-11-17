@@ -9,17 +9,16 @@
   No items found in this storage.
 </div>
 
-<!--
 <div *ngIf="items.length > 0" class="items-container">
-  <app-storage-card
-    *ngFor="let storage of storages"
-    [name]="storage.name"
-    [description]="storage.description"
-    [icon]="'archive'"
-    (edit)="editRoomStorage(storage)"
-    (delete)="deleteRoomStorage(storage)"
-    (click)="viewItems(storage)"
-  ></app-storage-card>
+  <app-item-card
+    *ngFor="let item of items"
+    [name]="item.name"
+    [description]="item.description"
+    [icon]="'check_box'"
+    [count]="item.count"
+    [expirationDate]="item.expirationDate || null"
+    [warrantyDate]="item.warrantyDate || null"
+    (delete)="deleteItem(item)"
+  ></app-item-card>
 </div>
--->
   

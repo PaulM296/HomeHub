@@ -9,6 +9,11 @@
       <div class="description-container">
         <mat-card-subtitle class="description">{{ description }}</mat-card-subtitle>
       </div>
+      <div class="additional-info">
+        <p *ngIf="count">Quantity: {{ count }}</p>
+        <p *ngIf="expirationDate">Expiration Date: {{ expirationDate | date: 'yyyy-MM-dd' }}</p>
+        <p *ngIf="warrantyDate">Warranty Date: {{ warrantyDate | date: 'yyyy-MM-dd' }}</p>
+      </div>
     </div>
 
     <div class="actions">
@@ -17,4 +22,4 @@
     </div>
   </div>
 </mat-card>
-  
+

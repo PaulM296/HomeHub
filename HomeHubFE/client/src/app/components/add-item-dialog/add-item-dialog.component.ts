@@ -43,7 +43,7 @@ export class AddItemDialogComponent {
   ) {
     this.itemForm = this.fb.group({
       name: ['', Validators.required],
-      quantity: [1, [Validators.required, Validators.min(1)]],
+      count: [1, [Validators.required, Validators.min(1)]],
       description: ['', Validators.required],
       expirationDate: [null],
       warrantyDate: [null]
@@ -52,8 +52,24 @@ export class AddItemDialogComponent {
 
   submit() {
     if (this.itemForm.valid) {
-      this.dialogRef.close(this.itemForm.value);
+      const formValue = this.itemForm.value;
+  
+      const formattedData = {
+        ...formValue,
+        expirationDate: formValue.expirationDate ? this.formatDate(formValue.expirationDate) : null,
+        warrantyDate: formValue.warrantyDate ? this.formatDate(formValue.warrantyDate) : null
+      };
+  
+      this.dialogRef.close(formattedData);
     }
+  }
+  
+  // Utility method to format dates
+  private formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 
   close() {

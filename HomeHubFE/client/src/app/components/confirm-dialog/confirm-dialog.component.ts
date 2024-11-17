@@ -1,10 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogActions, MatDialogContent } from '@angular/material/dialog';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 
 export interface ConfirmDialogData {
   itemType: string;
