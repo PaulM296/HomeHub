@@ -1,7 +1,9 @@
 <div class="header">
   <h1>Storages</h1>
-  <button mat-raised-button color="accent" (click)="addFridge()">+ Add Fridge</button>
-  <button mat-raised-button color="accent" (click)="addDeposit()">+ Add Deposit</button>
+  <div>
+    <button mat-raised-button class="button" color="accent" (click)="addFridge()">+ Add Fridge</button>
+    <button mat-raised-button class="button" color="accent" (click)="addDeposit()">+ Add Deposit</button>
+  </div>
 </div>
 
 <div *ngIf="isLoading" class="loading">Loading storages...</div>
