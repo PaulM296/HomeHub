@@ -12,6 +12,7 @@ import { UpdateStorage } from '../../models/updateStorage';
 import { EditStorageDialogComponent, EditStorageDialogData } from '../edit-storage-dialog/edit-storage-dialog.component';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../confirm-dialog/confirm-dialog.component';
 import { StorageDataService } from '../../services/storage-data.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-room',
@@ -27,6 +28,7 @@ import { StorageDataService } from '../../services/storage-data.service';
 export class RoomComponent implements OnInit {
   private storageService = inject(StorageService);
   private storageDataService = inject(StorageDataService);
+  private snackBar = inject(SnackbarService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private dialog = inject(MatDialog);
@@ -75,12 +77,16 @@ export class RoomComponent implements OnInit {
       if (result) {
         this.storageService.updateStorage(room.name, result).subscribe({
           next: (updatedRoom) => {
+            this.snackBar.success('Room updated successfully!');
             const index = this.rooms.findIndex(r => r.id === updatedRoom.id);
             if (index !== -1) {
               this.rooms[index] = updatedRoom;
             }
           },
-          error: (err) => console.error('Error updating room:', err)
+          error: (err) => {
+            this.snackBar.error('Error updating room!');
+            console.error('Error updating room:', err);
+          }
         });
       }
     });
@@ -95,10 +101,13 @@ export class RoomComponent implements OnInit {
       if (confirmed) {
         this.storageService.deleteStorage(room.name).subscribe({
           next: () => {
+            this.snackBar.success('Room deleted successfully!');
             this.rooms = this.rooms.filter(r => r.id !== room.id);
-            console.log(`Room ${room.name} deleted successfully.`);
           },
-          error: (err) => console.error('Error deleting room:', err)
+          error: (err) => {
+            this.snackBar.error('Error deleting room!');
+            console.error('Error deleting room:', err);
+          }
         });
       }
     });
@@ -119,9 +128,13 @@ export class RoomComponent implements OnInit {
   
         this.storageService.createStorage(newRoomData).subscribe({
           next: (newRoom) => {
+            this.snackBar.success('Room added successfully!');
             this.rooms.push(newRoom);
           },
-          error: (err) => console.error('Error adding room:', err)
+          error: (err) => {
+            this.snackBar.error('Error adding room!');
+            console.error('Error adding room:', err);
+          }
         });
       }
     });
