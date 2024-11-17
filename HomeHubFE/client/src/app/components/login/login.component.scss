@@ -1,36 +1,5 @@
-// .login-container {
-//     width: 100%;
-//     max-width: 400px;
-//     margin: 0 auto;
-//     padding: 20px;
-//     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-// }
-
-// h2 {
-//     text-align: center;
-//     margin-bottom: 20px;
-// }
-
-// .full-width {
-//     width: 100%;
-// }
-
-// button {
-//     width: 100%;
-//     margin-top: 20px;
-// }
-
-// .error-message {
-//     color: #e53935;
-//     text-align: center;
-//     margin-top: 10px;
-// }
-
-// Define color variables for easy customization
-// Define color variables and image
-
 // Define the image URL and colors
-$image-url: '../../../assets/images/login_background.png'; // Replace with your image URL
+$image-url: '../../../../public/auth_background.png'; // Replace with your image URL
 $primary-color: #3f51b5; // Primary button color
 $error-color: #e74c3c; // Error message color
 
@@ -49,6 +18,23 @@ $error-color: #e74c3c; // Error message color
         background: url($image-url) no-repeat center center;
         background-size: cover;
         z-index: 1;
+
+        .title-container {
+            margin-left: 2%;
+            margin-top: 1%;
+            display: flex;
+            align-items: center;
+        }
+
+        .app-icon {
+            height: 120px;
+        }
+
+        .app-name {
+            color: rgba(255, 255, 255, 1);
+            margin-left: 30px;
+            font-size: 60px;
+        }
 
         .gradient-overlay {
             position: absolute;
