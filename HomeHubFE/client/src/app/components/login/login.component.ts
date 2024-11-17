@@ -49,7 +49,6 @@ export class LoginComponent {
       this.accountService.login(email, password).subscribe({
         next: (response) => {
           localStorage.setItem('token', response.token);
-          this.snackbarService.success('Login successful!');
           this.router.navigate(['/']);
         },
         error: (error) => {
@@ -58,5 +57,9 @@ export class LoginComponent {
         }
       });
     }
+  }
+
+  goToRegister(): void {
+    this.router.navigate(['/register']);
   }
 }

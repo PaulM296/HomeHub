@@ -1,4 +1,4 @@
-<mat-card class="login-container">
+<!-- <mat-card class="login-container">
     <h2>Login</h2>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="fill" class="full-width">
@@ -34,4 +34,40 @@
         </button>
         <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
     </form>
-</mat-card>
+</mat-card> -->
+
+<div class="login-page">
+    <div class="image-container">
+        <div class="gradient-overlay"></div>
+    </div>
+    <mat-card class="login-container">
+        <h2>Login</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" formControlName="email" required autocomplete="email" />
+                <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                    Please enter a valid email.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password" required autocomplete="current-password" />
+                <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                    Password is required.
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid" class="login-button">
+                Login
+            </button>
+
+            <p class="register-link">
+                Don't have an account? <a (click)="goToRegister()">Create one</a>
+            </p>
+
+            <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+        </form>
+    </mat-card>
+</div>
