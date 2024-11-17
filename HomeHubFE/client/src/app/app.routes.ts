@@ -8,10 +8,10 @@ import { RoomStoragesComponent } from './components/room-storages/room-storages.
 import { ItemComponent } from './components/item/item.component';
 
 export const routes: Routes = [
-    {path: '', component:HomeComponent},
-    {path: 'login', component:LoginComponent},
+    {path: '', component:LoginComponent},
     {path: 'register', component:RegisterComponent},
     {path: 'not-found', component: NotFoundComponent},
+    {path: 'houses', component:HomeComponent},
     {path: 'houses/:houseId/rooms', component: RoomComponent},
     {path: 'rooms/:roomId/storages', component: RoomStoragesComponent},
     {path: 'storage/:storageId/items', component: ItemComponent},

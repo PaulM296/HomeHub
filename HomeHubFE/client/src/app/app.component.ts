@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent implements OnInit {
   title = 'HomeHub';
   showHeader = true;
-  headerlessRoutes: string[] = ['/not-found', '/login', '/register'];
+  headerlessRoutes: string[] = ['/not-found', '/', '/register'];
 
   constructor(private router: Router) {}
 

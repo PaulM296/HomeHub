@@ -22,7 +22,7 @@ export class HeaderComponent {
         localStorage.removeItem('token');
 
         // Clear history and redirect
-        this.router.navigate(['/login'], { replaceUrl: true }).then(() => {
+        this.router.navigate(['/'], { replaceUrl: true }).then(() => {
           window.history.pushState(null, '', window.location.href);
           window.onpopstate = () => {
             window.history.pushState(null, '', window.location.href);

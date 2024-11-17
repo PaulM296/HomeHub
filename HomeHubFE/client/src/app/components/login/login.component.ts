@@ -49,7 +49,7 @@ export class LoginComponent {
       this.accountService.login(email, password).subscribe({
         next: (response) => {
           localStorage.setItem('token', response.token);
-          this.router.navigate(['/']);
+          this.router.navigate(['/houses']);
         },
         error: (error) => {
           this.errorMessage = 'Invalid email or password';
