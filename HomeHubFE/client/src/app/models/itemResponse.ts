@@ -4,6 +4,6 @@ export interface ItemResponse {
   count: number;
   description: string;
   storageName: string;
-  expirationDate?: string;
-  warrantyDate?: string;
+  expirationDate: string | null;
+  warrantyDate: string | null;
 }

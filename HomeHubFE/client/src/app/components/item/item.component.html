@@ -16,8 +16,9 @@
     [description]="item.description"
     [icon]="'check_box'"
     [count]="item.count"
-    [expirationDate]="item.expirationDate || null"
-    [warrantyDate]="item.warrantyDate || null"
+    [expirationDate]="item.expirationDate"
+    [warrantyDate]="item.warrantyDate"
+    (edit)="editItem(item)"
     (delete)="deleteItem(item)"
   ></app-item-card>
 </div>
